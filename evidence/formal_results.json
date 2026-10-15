@@ -1,0 +1,248 @@
+{
+  "generated_utc": "2026-10-15T06:01:44.113840+00:00",
+  "solver": "Z3 5.3.0",
+  "method": "SMT checks of single-session transition abstraction, release predicates and rights-set derivation",
+  "assumptions": [
+    "Trusted evidence is accurate.",
+    "Signatures and cryptographic bindings are abstract valid/invalid predicates.",
+    "Release checks current state atomically.",
+    "Single immutable session ID; recovery issues another ID.",
+    "No direct backing-store bypass."
+  ],
+  "not_proved": [
+    "Python implementation refinement",
+    "cryptographic primitive security",
+    "OS or network isolation",
+    "LLM reasoning safety",
+    "distributed revocation latency",
+    "complete architecture correctness"
+  ],
+  "queries": [
+    {
+      "name": "01_initial_revocation_invariant",
+      "result": "unsat",
+      "expected": "unsat",
+      "pass": true,
+      "scope": "Initial state satisfies the stated single-session invariant."
+    },
+    {
+      "name": "02_inductive_revocation_invariant",
+      "result": "unsat",
+      "expected": "unsat",
+      "pass": true,
+      "scope": "One-step induction for all modeled actions; combined with 01 gives arbitrary finite traces in this abstraction."
+    },
+    {
+      "name": "03_no_release_after_revocation",
+      "result": "unsat",
+      "expected": "unsat",
+      "pass": true,
+      "scope": "Model release guard disallows revoked grants."
+    },
+    {
+      "name": "04_no_release_during_checkpoint",
+      "result": "unsat",
+      "expected": "unsat",
+      "pass": true,
+      "scope": "Model release guard pauses protected operations during checkpoint."
+    },
+    {
+      "name": "05_no_release_missing_critical_evidence",
+      "result": "unsat",
+      "expected": "unsat",
+      "pass": true,
+      "scope": "All listed modeled critical gates are necessary."
+    },
+    {
+      "name": "06_no_cross_instance_release",
+      "result": "unsat",
+      "expected": "unsat",
+      "pass": true,
+      "scope": "Instance binding in the modeled release rule."
+    },
+    {
+      "name": "07_expired_grant_cannot_release",
+      "result": "unsat",
+      "expected": "unsat",
+      "pass": true,
+      "scope": "Mathematical expiry boundary; clock integrity is assumed."
+    },
+    {
+      "name": "08_delegation_cannot_amplify",
+      "result": "unsat",
+      "expected": "unsat",
+      "pass": true,
+      "scope": "16-bit set-intersection delegation design. This derivation is specified, not implemented as a complete delegation chain in engine.py."
+    },
+    {
+      "name": "09_nonvacuous_legitimate_release",
+      "result": "sat",
+      "expected": "sat",
+      "pass": true,
+      "scope": "Shows the model permits legitimate release; not a deny-all proof.",
+      "witness": {
+        "expiry": "1",
+        "now": "0",
+        "proof": "True",
+        "grant_valid": "True",
+        "compartment": "True",
+        "policy": "True",
+        "group": "True",
+        "task_binding": "True",
+        "scope": "True",
+        "checkpoint": "True",
+        "identity_binding": "True",
+        "environment": "True",
+        "revoked": "False",
+        "authority": "True",
+        "phase": "1",
+        "requester": "0",
+        "owner": "0"
+      }
+    },
+    {
+      "name": "10_legitimate_admission_reachable",
+      "result": "sat",
+      "expected": "sat",
+      "pass": true,
+      "scope": "Positive reachability witness for admission.",
+      "witness": {
+        "authority_next": "True",
+        "environment_next": "True",
+        "revoked_next": "False",
+        "group_next": "True",
+        "grant_valid": "False",
+        "environment": "True",
+        "revoked": "False",
+        "phase_next": "1",
+        "action": "1",
+        "group": "True",
+        "grant_valid_next": "True",
+        "authority": "True",
+        "phase": "0"
+      }
+    },
+    {
+      "name": "11_counterexample_missing_authority_gate",
+      "result": "sat",
+      "expected": "sat",
+      "pass": true,
+      "scope": "Detects omitted authority requirement in a deliberately weakened model.",
+      "witness": {
+        "expiry": "1",
+        "now": "0",
+        "proof": "True",
+        "grant_valid": "True",
+        "compartment": "True",
+        "policy": "True",
+        "group": "True",
+        "task_binding": "True",
+        "scope": "True",
+        "identity_binding": "True",
+        "checkpoint": "True",
+        "environment": "True",
+        "revoked": "False",
+        "authority": "False",
+        "phase": "1",
+        "requester": "0",
+        "owner": "0"
+      }
+    },
+    {
+      "name": "12_counterexample_revoked_checkpoint_reactivation",
+      "result": "sat",
+      "expected": "sat",
+      "pass": true,
+      "scope": "Detects a deliberately weakened checkpoint transition.",
+      "witness": {
+        "revoked": "True",
+        "phase_next": "1",
+        "action": "3",
+        "revoked_next": "True",
+        "grant_valid_next": "True",
+        "grant_valid": "False",
+        "phase": "3"
+      }
+    },
+    {
+      "name": "13_counterexample_cached_authorization_race",
+      "result": "sat",
+      "expected": "sat",
+      "pass": true,
+      "scope": "A cached initial allow can coexist with revocation before commit; illustrates a race if commit does not recheck.",
+      "witness": {
+        "authorized_start": "True",
+        "revoked_commit": "True"
+      }
+    },
+    {
+      "name": "14_commit_recheck_prevents_modeled_race",
+      "result": "unsat",
+      "expected": "unsat",
+      "pass": true,
+      "scope": "With atomic current-state recheck, that particular stale-allow release is excluded. Atomicity is an assumption, not proved for distributed services."
+    },
+    {
+      "name": "15_identity_binding_required",
+      "result": "unsat",
+      "expected": "unsat",
+      "pass": true,
+      "scope": "Tightened release rule requires current instance/key generation binding."
+    },
+    {
+      "name": "16_task_binding_required",
+      "result": "unsat",
+      "expected": "unsat",
+      "pass": true,
+      "scope": "Tightened release rule requires current approved task snapshot."
+    },
+    {
+      "name": "17_current_epoch_prevents_stale_release",
+      "result": "unsat",
+      "expected": "unsat",
+      "pass": true,
+      "scope": "Snapshot equality at atomic release excludes already-committed generation changes. Implementation locking/refinement remains an obligation."
+    },
+    {
+      "name": "18_counterexample_omitted_identity_binding",
+      "result": "sat",
+      "expected": "sat",
+      "pass": true,
+      "scope": "An older modeled guard accepts a valid identity proof without current instance binding.",
+      "witness": {
+        "expiry": "1",
+        "now": "0",
+        "proof": "True",
+        "grant_valid": "True",
+        "compartment": "True",
+        "policy": "True",
+        "group": "True",
+        "task_binding": "True",
+        "scope": "True",
+        "identity_binding": "False",
+        "checkpoint": "True",
+        "environment": "True",
+        "revoked": "False",
+        "authority": "True",
+        "phase": "1",
+        "requester": "0",
+        "owner": "0"
+      }
+    },
+    {
+      "name": "19_global_challenge_quota_preserved",
+      "result": "unsat",
+      "expected": "unsat",
+      "pass": true,
+      "scope": "Integer admission guard preserves configured global pending-challenge capacity."
+    },
+    {
+      "name": "20_per_agent_challenge_quota_preserved",
+      "result": "unsat",
+      "expected": "unsat",
+      "pass": true,
+      "scope": "Integer admission guard preserves the per-agent capacity, assuming serialized update."
+    }
+  ],
+  "all_expected_results": true
+}

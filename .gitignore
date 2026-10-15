@@ -1,0 +1,8 @@
+.venv/
+__pycache__/
+*.pyc
+.scratch/
+# Root outputs are regenerated locally; published evidence is under evidence/.
+/*_results.json
+/finding_reproductions.json
+/*.log

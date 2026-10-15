@@ -1,0 +1,243 @@
+--- before/engine.py
++++ engine.py
+@@ -10,6 +10,9 @@
+ import threading
+ import time
+ import uuid
++import math
++from collections import deque
++from functools import wraps
+ from dataclasses import dataclass, field
+ from cryptography.exceptions import InvalidSignature, InvalidTag
+ from cryptography.hazmat.primitives import hashes, serialization
+@@ -109,6 +112,14 @@
+     checkpoint: str = 'PASS'
+ 
+ 
++def serialized(method):
++    @wraps(method)
++    def call(self, *args, **kwargs):
++        with self.lock:
++            return method(self, *args, **kwargs)
++    return call
++
++
+ class Domain:
+     def __init__(self, authority, clock=None):
+         self.clock = clock or Clock()
+@@ -119,9 +130,13 @@
+         self.tasks = {}
+         self.groups = {}
+         self.challenges = {}
+-        self.approvals_used = set()
++        self.approvals_used = {}
+         self.sessions = {}
+-        self.events = []
++        self.events = deque(maxlen=8192)
++        self.max_challenges = 128
++        self.max_agent_challenges = 16
++        self.max_sessions = 256
++        self.max_requests_per_session = 4096
+         self.policy_version = 1
+         self.verifier_available = True
+         self.objects = {'inventory': (2, {'retail'}, b'SYNTHETIC inventory: branch total=125'),
+@@ -133,17 +148,23 @@
+     @property
+     def verifier(self):
+         return self._sign.public_key()
++    @serialized
+     def register(self, agent, clearance=2, compartments=('retail',)):
+         # Trusted enrollment authority supplies these, never the requesting agent.
+-        self.identities[agent.name] = {'sign': agent.signing_public,
++        generation = self.identities.get(agent.name, {}).get('generation', 0) + 1
++        env_generation = self.environments.get(agent.name, {}).get('version', 0) + 1
++        self.identities[agent.name] = {'generation': generation, 'sign': agent.signing_public,
+             'exchange': agent.exchange_public, 'clearance': clearance,
+             'compartments': set(compartments), 'enabled': True}
+-        self.environments[agent.name] = {'version': 1, 'isolation': True,
++        self.environments[agent.name] = {'version': env_generation, 'isolation': True,
+             'paths': {'internal'}, 'expires': self.clock.now()+300}
++    @serialized
+     def configure_task(self, task_id, agents, resources=('inventory',), destinations=('internal',)):
+-        self.tasks[task_id] = {'agents': set(agents), 'resources': set(resources),
++        task_generation = self.tasks.get(task_id, {}).get('version', 0) + 1
++        group_generation = self.groups.get(task_id, {}).get('version', 0) + 1
++        self.tasks[task_id] = {'version': task_generation, 'agents': set(agents), 'resources': set(resources),
+             'destinations': set(destinations), 'purpose': 'inventory-analysis'}
+-        self.groups[task_id] = {'members': set(agents), 'version': 1,
++        self.groups[task_id] = {'members': set(agents), 'version': group_generation,
+             'assessment': 'PASS'}
+     def admission_request(self, agent, task_id='stock', resources=('inventory',), destinations=('internal',)):
+         return {'agent': agent, 'task': task_id, 'resources': sorted(resources),
+@@ -151,8 +172,16 @@
+             'audience': 'Domain-X', 'client_nonce': secrets.token_hex(16)}
+     def challenge(self, request):
+         with self.lock:
++            self._validate_admission(request)
++            identity = self.identities.get(request['agent'])
++            if not identity or not identity['enabled']:
++                self._deny('unknown or disabled identity')
++            self.challenges = {k:v for k,v in self.challenges.items() if v[1] > self.clock.now()}
++            count = sum(v[2] == request['agent'] for v in self.challenges.values())
++            if len(self.challenges) >= self.max_challenges or count >= self.max_agent_challenges:
++                self._deny('challenge quota exceeded')
+             nonce = secrets.token_hex(32)
+-            self.challenges[nonce] = (digest(request), self.clock.now()+10)
++            self.challenges[nonce] = (digest(request), self.clock.now()+10, request['agent'])
+             return nonce
+     def _deny(self, reason, **context):
+         self.events.append({'time': self.clock.now(), 'event': 'DENY', 'reason': reason, **context})
+@@ -170,6 +199,9 @@
+         return level <= identity['clearance'] and compartments <= identity['compartments']
+     def admit(self, request, challenge, proof, approval):
+         with self.lock:
++            self._validate_admission(request)
++            if not self._text(challenge, 64) or not self._text(proof, 128):
++                self._deny('invalid admission proof envelope')
+             entry = self.challenges.pop(challenge, None)
+             if not entry or entry[0] != digest(request) or entry[1] <= self.clock.now():
+                 self._deny('invalid or expired admission challenge')
+@@ -194,6 +226,7 @@
+                 self._deny('critical environment check failed')
+             if not approval:
+                 self._deny('authority approval missing')
++            self._validate_approval(approval)
+             try:
+                 self.authority.verify(unb64(approval['signature']), canon(approval['body']))
+             except (InvalidSignature, ValueError, TypeError, KeyError):
+@@ -202,7 +235,11 @@
+             if (ab['request'] != digest(request) or ab['expires'] <= self.clock.now()
+                 or ab['authority_level'] < 2 or ab['approval_id'] in self.approvals_used):
+                 self._deny('authority binding, freshness or reuse failed')
+-            self.approvals_used.add(ab['approval_id'])
++            self.sessions = {k:v for k,v in self.sessions.items() if v.grant['expires'] > self.clock.now()}
++            self.approvals_used = {k:v for k,v in self.approvals_used.items() if v > self.clock.now()}
++            if len(self.sessions) >= self.max_sessions:
++                self._deny('session quota exceeded')
++            self.approvals_used[ab['approval_id']] = ab['expires']
+             sid = str(uuid.uuid4())
+             ephemeral = x25519.X25519PrivateKey.generate()
+             server_public = b64(public(ephemeral))
+@@ -212,12 +249,15 @@
+                 'destinations': request['destinations'][:], 'expires': self.clock.now()+60,
+                 'env_version': self.environments[request['agent']]['version'],
+                 'group_version': group['version'], 'policy_version': self.policy_version,
+-                'server_public': server_public}
++                'server_public': server_public,
++                'identity_binding': self._identity_binding(identity),
++                'task_binding': self._task_binding(task)}
+             self.sessions[sid] = Session(copy.deepcopy(grant), key)
+             self.events.append({'time': self.clock.now(), 'event': 'GRANT', 'sid': sid, 'agent': request['agent']})
+             return {'grant': grant, 'signature': b64(self._sign.sign(canon(grant))), 'server_public': server_public}
+     def operate(self, signed):
+         with self.lock:
++            self._validate_operation(signed)
+             body = signed['body'];sid = body.get('sid')
+             session = self.sessions.get(sid)
+             if not session:
+@@ -232,6 +272,8 @@
+                 self._deny('request signature invalid')
+             if not identity['enabled'] or session.state != 'ACTIVE':
+                 self._deny('session or identity inactive')
++            if grant['identity_binding'] != self._identity_binding(identity):
++                self._deny('identity generation or key binding changed')
+             if session.checkpoint != 'PASS':
+                 self._deny('checkpoint pending or failed')
+             if grant['expires'] <= self.clock.now():
+@@ -242,9 +284,14 @@
+                 self._deny('request freshness or audience failed')
+             if body['request_id'] in session.request_ids:
+                 self._deny('request replay')
++            if len(session.request_ids) >= self.max_requests_per_session:
++                session.state = 'REVOKED'
++                self._deny('session request budget exhausted')
+             session.request_ids.add(body['request_id'])
+             group = self.groups[grant['task']]
+             task = self.tasks[grant['task']]
++            if grant['task_binding'] != self._task_binding(task):
++                self._deny('boundary: task authority or purpose changed')
+             if (group['version'] != grant['group_version'] or group['assessment'] != 'PASS'
+                 or grant['agent'] not in group['members'] or grant['agent'] not in task['agents']):
+                 self._deny('group changed or failed')
+@@ -269,6 +316,81 @@
+             self.events.append({'time': self.clock.now(), 'event': 'RELEASE', 'sid': sid,
+                 'resource': body['resource'], 'request_id': body['request_id']})
+             return envelope
++    @staticmethod
++    def _text(value, maximum=256):
++        return type(value) is str and 0 < len(value) <= maximum
++
++    @staticmethod
++    def _finite_time(value):
++        return type(value) in (int,float) and -1e12 <= value <= 1e12 and math.isfinite(value)
++
++    def _validate_admission(self, request):
++        fields = {'agent','task','resources','destinations','purpose','audience','client_nonce'}
++        if type(request) is not dict or set(request) != fields:
++            self._deny('malformed admission request')
++        for key in fields - {'resources','destinations'}:
++            if not self._text(request[key]):
++                self._deny('malformed admission scalar')
++        for key in ('resources','destinations'):
++            values = request[key]
++            if type(values) is not list or not 1 <= len(values) <= 32 or not all(self._text(v) for v in values):
++                self._deny('malformed admission scope')
++            if len(set(values)) != len(values):
++                self._deny('duplicate admission scope')
++
++    def _validate_approval(self, approval):
++        if type(approval) is not dict or set(approval) != {'body','signature'} or not self._text(approval['signature'],128):
++            self._deny('malformed authority approval')
++        body = approval['body']
++        if type(body) is not dict or set(body) != {'request','expires','approval_id','authority_level'}:
++            self._deny('malformed authority body')
++        if (not self._text(body['request'],64) or not self._text(body['approval_id'],128)
++            or not self._finite_time(body['expires'])
++            or type(body['authority_level']) is not int):
++            self._deny('malformed authority fields')
++
++    def _validate_operation(self, signed):
++        if type(signed) is not dict or set(signed) != {'body','signature'} or not self._text(signed['signature'],128):
++            self._deny('malformed request envelope')
++        body = signed['body']
++        fields = {'sid','agent','resource','destination','action','request_id','at','audience'}
++        if type(body) is not dict or set(body) != fields:
++            self._deny('malformed request body')
++        if not all(self._text(body[k]) for k in fields-{'at'}):
++            self._deny('malformed request fields')
++        if not self._finite_time(body['at']):
++            self._deny('malformed request time')
++
++    @staticmethod
++    def _identity_binding(identity):
++        return digest({'generation': identity['generation'],
++            'signing_key': b64(identity['sign'].public_bytes(serialization.Encoding.Raw,serialization.PublicFormat.Raw)),
++            'exchange_key': b64(identity['exchange']), 'clearance':identity['clearance'],
++            'compartments':sorted(identity['compartments'])})
++
++    @staticmethod
++    def _task_binding(task):
++        return digest({'version':task.get('version',0),'agents':sorted(task['agents']),
++            'resources':sorted(task['resources']),'destinations':sorted(task['destinations']),
++            'purpose':task['purpose']})
++
++    @serialized
++    def update_task(self, task_id, purpose=None, resources=None, destinations=None):
++        task = self.tasks[task_id]
++        if purpose is not None:task['purpose']=purpose
++        if resources is not None:task['resources']=set(resources)
++        if destinations is not None:task['destinations']=set(destinations)
++        task['version'] += 1
++
++    @serialized
++    def set_identity_enabled(self, agent, enabled):
++        self.identities[agent]['enabled'] = bool(enabled)
++        self.identities[agent]['generation'] += 1
++
++    @serialized
++    def update_policy(self):
++        self.policy_version += 1
++
+     def change_environment(self, agent, paths=None, isolation=None):
+         with self.lock:
+             env = self.environments[agent];env['version'] += 1

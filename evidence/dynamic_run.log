@@ -1,0 +1,14 @@
+{
+  "generated_utc": "2026-10-15T06:01:44.003088+00:00",
+  "method": "Stateful scripted tool-action fuzzing and thread interleavings; NO live-model cognitive robustness benchmark",
+  "episodes": 200,
+  "actions": 5000,
+  "observed_reads": {
+    "released": 166,
+    "denied": 738
+  },
+  "malformed_envelopes": 57,
+  "concurrent_trials": 120,
+  "assertions": 2159,
+  "passed": 2159
+}

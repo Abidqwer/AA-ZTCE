@@ -1,0 +1,15 @@
+cff-version: 1.2.0
+message: "Please cite this architecture proposal and reference implementation."
+title: "AA-ZTCE: An Assurance-Driven Security Architecture for Autonomous Multi-Agent Systems"
+authors:
+  - family-names: "Yousef"
+    given-names: "Abid"
+version: "0.2.0"
+date-released: "2026-10-15"
+url: "https://github.com/Abidqwer/AA-ZTCE"
+type: software
+abstract: >-
+  Proposed architecture and local reference implementation combining per-agent
+  identity, environment and workflow evidence, scoped cryptographic sessions,
+  hierarchical approval, continuous checkpoints and revocation. Preliminary
+  self-authored tests and Z3 model checks are included with explicit limitations.

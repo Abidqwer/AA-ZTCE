@@ -1,0 +1,7 @@
+{
+  "generated_utc": "2026-10-15T06:01:44.192124+00:00",
+  "method": "Scripted payload-associated malicious tool-action simulations. No live model consumed the text.",
+  "assertions_passed": 16,
+  "total": 16,
+  "blocked_out_of_scope_actions": 14
+}
