@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg
+  PUBLIC '-//W3C//DTD SVG 1.0//EN'
+  'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'>
+<svg width="487" height="225" preserveAspectRatio="xMinYMin meet" viewBox="0 0 487 225" xmlns="http://www.w3.org/2000/svg" version="1.0" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title>...</title>
+	<desc>...</desc>
+	<clipPath id="clip">
+		<rect x="0" y="0" width="487" height="225"/>
+	</clipPath>
+	<g id="group" transform="scale(1,-1) translate(0,-225)" style="clip-path: url(#clip)">
+		<g transform="">
+			<path d="M 145,174 L 171,174 Z" style="stroke: rgb(3%,49%,54%); stroke-linecap: butt; stroke-width: 1.3;"/>
+			<polygon points="171 174, 165.5973 176.6098, 165.5973 171.3902" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,54%); fill-rule: evenodd;"/>
+			<path d="M 316,174 L 342,174 Z" style="stroke: rgb(3%,49%,54%); stroke-linecap: butt; stroke-width: 1.3;"/>
+			<polygon points="342 174, 336.5973 176.6098, 336.5973 171.3902" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,54%); fill-rule: evenodd;"/>
+			<path d="M 342,174 L 316,64 Z" style="stroke: rgb(3%,49%,54%); stroke-linecap: butt; stroke-width: 1.3;"/>
+			<polygon points="316 64, 319.7826 68.65749, 314.7029 69.85813" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,54%); fill-rule: evenodd;"/>
+			<rect x="0" y="145" width="145" height="58" rx="7" ry="7" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(6%,14%,24%); fill-rule: evenodd;"/>
+			<text x="27.27412109374999" y="180.5" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,361) scale(1,-1)">Inspect the requester</text>
+			<text x="30.085742187499996" y="167.5" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,335) scale(1,-1)">and its environment</text>
+			<rect x="171" y="145" width="145" height="58" rx="7" ry="7" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,54%); fill-rule: evenodd;"/>
+			<text x="205.47031249999998" y="180.5" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,361) scale(1,-1)">Establish required</text>
+			<text x="203.928125" y="167.5" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,335) scale(1,-1)">security assurance</text>
+			<rect x="342" y="145" width="145" height="58" rx="7" ry="7" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(6%,14%,24%); fill-rule: evenodd;"/>
+			<text x="384.468359375" y="180.5" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,361) scale(1,-1)">Decide access</text>
+			<text x="364.54912109375" y="167.5" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,335) scale(1,-1)">and enforce boundaries</text>
+			<rect x="171" y="35" width="145" height="58" rx="7" ry="7" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,54%); fill-rule: evenodd;"/>
+			<text x="196.56992187499998" y="70.5" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,141) scale(1,-1)">Continuously reassess</text>
+			<text x="204.87558593749998" y="57.5" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,115) scale(1,-1)">Act when required</text>
+		</g>
+	</g>
+</svg>

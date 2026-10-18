@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg
+  PUBLIC '-//W3C//DTD SVG 1.0//EN'
+  'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'>
+<svg width="487" height="360" preserveAspectRatio="xMinYMin meet" viewBox="0 0 487 360" xmlns="http://www.w3.org/2000/svg" version="1.0" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title>...</title>
+	<desc>...</desc>
+	<clipPath id="clip">
+		<rect x="0" y="0" width="487" height="360"/>
+	</clipPath>
+	<g id="group" transform="scale(1,-1) translate(0,-360)" style="clip-path: url(#clip)">
+		<g transform="">
+			<path d="M 145,317 L 171,317 Z" style="stroke: rgb(3%,49%,54%); stroke-linecap: butt; stroke-width: 1.3;"/>
+			<polygon points="171 317, 165.5973 319.6098, 165.5973 314.3902" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,54%); fill-rule: evenodd;"/>
+			<path d="M 243.5,291 L 243.5,242 Z" style="stroke: rgb(3%,49%,54%); stroke-linecap: butt; stroke-width: 1.3;"/>
+			<polygon points="243.5 242, 246.1098 247.4027, 240.8902 247.4027" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,54%); fill-rule: evenodd;"/>
+			<path d="M 145,100.5 L 171,213 Z" style="stroke: rgb(3%,49%,54%); stroke-linecap: butt; stroke-width: 1.3;"/>
+			<polygon points="171 213, 167.2407 208.3237, 172.3262 207.1484" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,54%); fill-rule: evenodd;"/>
+			<path d="M 342,100.5 L 316,213 Z" style="stroke: rgb(3%,49%,54%); stroke-linecap: butt; stroke-width: 1.3;"/>
+			<polygon points="316 213, 314.6738 207.1484, 319.7593 208.3237" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,54%); fill-rule: evenodd;"/>
+			<rect x="0" y="291" width="145" height="52" rx="7" ry="7" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(6%,14%,24%); fill-rule: evenodd;"/>
+			<text x="37.47265624999999" y="323.5" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,647) scale(1,-1)">Requester agent</text>
+			<text x="29.751464843749993" y="310.5" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,621) scale(1,-1)">No authority secrets</text>
+			<rect x="171" y="291" width="145" height="52" rx="7" ry="7" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,54%); fill-rule: evenodd;"/>
+			<text x="222.99013671875" y="323.5" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,647) scale(1,-1)">Domain X</text>
+			<text x="197.2138671875" y="310.5" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,621) scale(1,-1)">Request and checklist</text>
+			<rect x="171" y="184" width="145" height="58" rx="7" ry="7" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,54%); fill-rule: evenodd;"/>
+			<text x="206.9796875" y="226.0" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,452) scale(1,-1)">Protected verifier</text>
+			<text x="199.98857421875" y="213.0" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,426) scale(1,-1)">Challenge / approval</text>
+			<text x="209.26015625" y="200.0" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,400) scale(1,-1)">Request binding</text>
+			<rect x="0" y="70" width="145" height="61" rx="7" ry="7" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(6%,14%,24%); fill-rule: evenodd;"/>
+			<text x="28.05341796874999" y="113.5" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,227) scale(1,-1)">Designated authority</text>
+			<text x="26.732714843749996" y="100.5" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,201) scale(1,-1)">Administrator / owner</text>
+			<text x="29.812988281249993" y="87.5" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,175) scale(1,-1)">Protected credential</text>
+			<rect x="342" y="70" width="145" height="61" rx="7" ry="7" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(6%,14%,24%); fill-rule: evenodd;"/>
+			<text x="380.06123046875" y="113.5" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,227) scale(1,-1)">Higher authority</text>
+			<text x="376.48876953125" y="100.5" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,201) scale(1,-1)">Stronger approval</text>
+			<text x="372.032421875" y="87.5" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,175) scale(1,-1)">Separation of duties</text>
+		</g>
+	</g>
+</svg>

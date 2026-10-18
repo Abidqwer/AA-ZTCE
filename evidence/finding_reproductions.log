@@ -1,0 +1,32 @@
+{
+  "before": {
+    "F01_task_purpose_drift": "RELEASED",
+    "F02_rebound_instance_old_grant": "RELEASED",
+    "F04_malformed_envelope": "UNHANDLED_AttributeError",
+    "F05_challenge_pressure": {
+      "accepted": 300,
+      "stored": 300
+    },
+    "F03_identity_update_race": {
+      "release_count_at_identity_commit": 0,
+      "identity_commit_while_request_paused": true,
+      "operation": "RELEASED",
+      "release_count_final": 1
+    }
+  },
+  "after": {
+    "F01_task_purpose_drift": "DENIED",
+    "F02_rebound_instance_old_grant": "DENIED",
+    "F04_malformed_envelope": "DENIED",
+    "F05_challenge_pressure": {
+      "accepted": 16,
+      "stored": 16
+    },
+    "F03_identity_update_race": {
+      "identity_commit_while_request_paused": false,
+      "operation": "RELEASED",
+      "release_count_at_identity_commit": 1,
+      "release_count_final": 1
+    }
+  }
+}

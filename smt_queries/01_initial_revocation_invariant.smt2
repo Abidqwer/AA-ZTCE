@@ -1,0 +1,16 @@
+; benchmark generated from python API
+(set-info :status unknown)
+(declare-fun revoked () Bool)
+(declare-fun phase () Int)
+(declare-fun grant_valid () Bool)
+(declare-fun authority () Bool)
+(declare-fun group () Bool)
+(declare-fun environment () Bool)
+(assert
+ (let (($x31 (and (=> revoked (and (= phase 3) (not grant_valid))) (=> (= phase 3) revoked))))
+(let (($x27 (not grant_valid)))
+(let (($x33 (not revoked)))
+(let (($x32 (= phase 0)))
+(let (($x34 (and $x32 $x33 $x27 environment group authority)))
+(and $x34 (not $x31))))))))
+(check-sat)

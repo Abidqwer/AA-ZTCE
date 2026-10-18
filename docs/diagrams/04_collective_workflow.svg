@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg
+  PUBLIC '-//W3C//DTD SVG 1.0//EN'
+  'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'>
+<svg width="487" height="310" preserveAspectRatio="xMinYMin meet" viewBox="0 0 487 310" xmlns="http://www.w3.org/2000/svg" version="1.0" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title>...</title>
+	<desc>...</desc>
+	<clipPath id="clip">
+		<rect x="0" y="0" width="487" height="310"/>
+	</clipPath>
+	<g id="group" transform="scale(1,-1) translate(0,-310)" style="clip-path: url(#clip)">
+		<g transform="">
+			<path d="M 108,267.5 L 163,156.5 Z" style="stroke: rgb(3%,49%,54%); stroke-linecap: butt; stroke-width: 1.3;"/>
+			<polygon points="163 156.5, 162.9398 162.4997, 158.2628 160.1823" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,54%); fill-rule: evenodd;"/>
+			<path d="M 180,243 L 243,186 Z" style="stroke: rgb(3%,49%,54%); stroke-linecap: butt; stroke-width: 1.3;"/>
+			<polygon points="243 186, 240.7447 191.56, 237.2428 187.6895" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,54%); fill-rule: evenodd;"/>
+			<path d="M 306,243 L 243,186 Z" style="stroke: rgb(3%,49%,54%); stroke-linecap: butt; stroke-width: 1.3;"/>
+			<polygon points="243 186, 248.7572 187.6895, 245.2553 191.56" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,54%); fill-rule: evenodd;"/>
+			<path d="M 378,267.5 L 323,156.5 Z" style="stroke: rgb(3%,49%,54%); stroke-linecap: butt; stroke-width: 1.3;"/>
+			<polygon points="323 156.5, 327.7372 160.1823, 323.0602 162.4997" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,54%); fill-rule: evenodd;"/>
+			<path d="M 243,75 L 243,127 Z" style="stroke: rgb(3%,49%,54%); stroke-linecap: butt; stroke-width: 1.3;"/>
+			<polygon points="243 127, 240.3902 121.5973, 245.6098 121.5973" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,54%); fill-rule: evenodd;"/>
+			<rect x="0" y="243" width="108" height="49" rx="7" ry="7" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(6%,14%,24%); fill-rule: evenodd;"/>
+			<text x="28.830761718749997" y="274.0" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,548) scale(1,-1)">A: Research</text>
+			<text x="21.977050781249993" y="261.0" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,522) scale(1,-1)">Retrieve inputs</text>
+			<rect x="126" y="243" width="108" height="49" rx="7" ry="7" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(6%,14%,24%); fill-rule: evenodd;"/>
+			<text x="157.83515625" y="274.0" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,548) scale(1,-1)">B: Analyse</text>
+			<text x="143.3361328125" y="261.0" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,522) scale(1,-1)">Combine findings</text>
+			<rect x="252" y="243" width="108" height="49" rx="7" ry="7" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(6%,14%,24%); fill-rule: evenodd;"/>
+			<text x="285.1435546875" y="274.0" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,548) scale(1,-1)">C: Review</text>
+			<text x="274.344140625" y="261.0" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,522) scale(1,-1)">Evaluate result</text>
+			<rect x="378" y="243" width="108" height="49" rx="7" ry="7" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(6%,14%,24%); fill-rule: evenodd;"/>
+			<text x="411.06767578125" y="274.0" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,548) scale(1,-1)">D: Deliver</text>
+			<text x="399.0193359375" y="261.0" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,522) scale(1,-1)">Store / transmit</text>
+			<rect x="163" y="127" width="160" height="59" rx="7" ry="7" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,54%); fill-rule: evenodd;"/>
+			<text x="196.15810546875" y="169.5" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,339) scale(1,-1)">Collective assessment</text>
+			<text x="192.91376953124998" y="156.5" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,313) scale(1,-1)">Purpose + relationships</text>
+			<text x="200.860546875" y="143.5" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,287) scale(1,-1)">Combined exposure</text>
+			<rect x="163" y="16" width="160" height="59" rx="7" ry="7" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,54%); fill-rule: evenodd;"/>
+			<text x="191.28544921875" y="58.5" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,117) scale(1,-1)">Independent task record</text>
+			<text x="209.11083984375" y="45.5" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,91) scale(1,-1)">Approved scope</text>
+			<text x="191.96630859375" y="32.5" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,65) scale(1,-1)">Verified owner authority</text>
+		</g>
+	</g>
+</svg>

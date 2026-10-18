@@ -1,0 +1,4 @@
+Regression suite: 61 passed
+Stateful actions: 5000 assertions: 2159 / 2159 thread trials: 120
+Formal queries: 20 expected results: True
+Adversarial tool-action assertions: 16 / 16

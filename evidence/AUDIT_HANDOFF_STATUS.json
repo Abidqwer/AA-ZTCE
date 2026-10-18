@@ -1,0 +1,15 @@
+{
+  "candidate": "AA-ZTCE core 0.2",
+  "internal_testing": "completed within recorded scope",
+  "package": "ready",
+  "recipient": null,
+  "sent": false,
+  "independent_review": "not performed",
+  "booking": "not scheduled",
+  "required_for_delivery": "verified external auditor/contact",
+  "required_for_paid_booking": [
+    "engagement terms",
+    "authorized budget",
+    "date window"
+  ]
+}

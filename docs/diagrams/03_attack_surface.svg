@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg
+  PUBLIC '-//W3C//DTD SVG 1.0//EN'
+  'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'>
+<svg width="487" height="365" preserveAspectRatio="xMinYMin meet" viewBox="0 0 487 365" xmlns="http://www.w3.org/2000/svg" version="1.0" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title>...</title>
+	<desc>...</desc>
+	<clipPath id="clip">
+		<rect x="0" y="0" width="487" height="365"/>
+	</clipPath>
+	<g id="group" transform="scale(1,-1) translate(0,-365)" style="clip-path: url(#clip)">
+		<g transform="">
+			<path d="M 145,321.5 L 174,206 Z" style="stroke: rgb(3%,49%,54%); stroke-linecap: butt; stroke-width: 1.3;"/>
+			<polygon points="174 206, 175.2155 211.8756, 170.1531 210.6045" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,54%); fill-rule: evenodd;"/>
+			<path d="M 342,321.5 L 314,206 Z" style="stroke: rgb(3%,49%,54%); stroke-linecap: butt; stroke-width: 1.3;"/>
+			<polygon points="314 206, 317.8092 210.6357, 312.7365 211.8655" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,54%); fill-rule: evenodd;"/>
+			<path d="M 145,206 L 174,206 Z" style="stroke: rgb(3%,49%,54%); stroke-linecap: butt; stroke-width: 1.3;"/>
+			<polygon points="174 206, 168.5973 208.6098, 168.5973 203.3902" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,54%); fill-rule: evenodd;"/>
+			<path d="M 314,206 L 342,206 Z" style="stroke: rgb(3%,49%,54%); stroke-linecap: butt; stroke-width: 1.3;"/>
+			<polygon points="342 206, 336.5973 208.6098, 336.5973 203.3902" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,54%); fill-rule: evenodd;"/>
+			<path d="M 244,174 L 244,110 Z" style="stroke: rgb(3%,49%,54%); stroke-linecap: butt; stroke-width: 1.3;"/>
+			<polygon points="244 110, 246.6098 115.4027, 241.3902 115.4027" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,54%); fill-rule: evenodd;"/>
+			<rect x="174" y="174" width="140" height="64" rx="7" ry="7" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(6%,14%,24%); fill-rule: evenodd;"/>
+			<text x="227.3599609375" y="212.5" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,425) scale(1,-1)">Agent A</text>
+			<text x="201.12841796875" y="199.5" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,399) scale(1,-1)">Requesting instance</text>
+			<rect x="0" y="295" width="145" height="53" rx="7" ry="7" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,54%); fill-rule: evenodd;"/>
+			<text x="34.57285156249999" y="328.0" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,656) scale(1,-1)">Owner / controller</text>
+			<text x="34.6466796875" y="315.0" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,630) scale(1,-1)">Instruction source</text>
+			<rect x="342" y="295" width="145" height="53" rx="7" ry="7" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,54%); fill-rule: evenodd;"/>
+			<text x="381.3265625" y="328.0" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,656) scale(1,-1)">Agents B / C / D</text>
+			<text x="368.3123046875" y="315.0" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,630) scale(1,-1)">Communication peers</text>
+			<rect x="0" y="174" width="145" height="64" rx="7" ry="7" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,54%); fill-rule: evenodd;"/>
+			<text x="42.177148437499994" y="212.5" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,425) scale(1,-1)">Tools / plugins</text>
+			<text x="30.19443359374999" y="199.5" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,399) scale(1,-1)">Execution pathways</text>
+			<rect x="342" y="174" width="145" height="64" rx="7" ry="7" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,54%); fill-rule: evenodd;"/>
+			<text x="380.73798828125" y="212.5" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,425) scale(1,-1)">Shared memory</text>
+			<text x="368.5583984375" y="199.5" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,399) scale(1,-1)">Files / queues / stores</text>
+			<rect x="174" y="53" width="140" height="57" rx="7" ry="7" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(71%,27%,27%); fill-rule: evenodd;"/>
+			<text x="199.4447265625" y="88.0" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,176) scale(1,-1)">External destinations</text>
+			<text x="199.85078125" y="75.0" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,150) scale(1,-1)">Network and outputs</text>
+		</g>
+	</g>
+</svg>

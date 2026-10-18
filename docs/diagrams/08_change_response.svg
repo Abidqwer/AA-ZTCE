@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg
+  PUBLIC '-//W3C//DTD SVG 1.0//EN'
+  'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'>
+<svg width="487" height="295" preserveAspectRatio="xMinYMin meet" viewBox="0 0 487 295" xmlns="http://www.w3.org/2000/svg" version="1.0" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title>...</title>
+	<desc>...</desc>
+	<clipPath id="clip">
+		<rect x="0" y="0" width="487" height="295"/>
+	</clipPath>
+	<g id="group" transform="scale(1,-1) translate(0,-295)" style="clip-path: url(#clip)">
+		<g transform="">
+			<path d="M 145,251 L 171,251 Z" style="stroke: rgb(3%,49%,54%); stroke-linecap: butt; stroke-width: 1.3;"/>
+			<polygon points="171 251, 165.5973 253.6098, 165.5973 248.3902" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,54%); fill-rule: evenodd;"/>
+			<path d="M 316,251 L 342,251 Z" style="stroke: rgb(3%,49%,54%); stroke-linecap: butt; stroke-width: 1.3;"/>
+			<polygon points="342 251, 336.5973 253.6098, 336.5973 248.3902" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,54%); fill-rule: evenodd;"/>
+			<path d="M 342,251 L 316,136 Z" style="stroke: rgb(3%,49%,54%); stroke-linecap: butt; stroke-width: 1.3;"/>
+			<polygon points="316 136, 319.737 140.6942, 314.6459 141.8452" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,54%); fill-rule: evenodd;"/>
+			<path d="M 171,136 L 145,28 Z" style="stroke: rgb(3%,49%,54%); stroke-linecap: butt; stroke-width: 1.3;"/>
+			<polygon points="145 28, 148.8018 32.64178, 143.7272 33.86345" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,54%); fill-rule: evenodd;"/>
+			<path d="M 316,136 L 342,28 Z" style="stroke: rgb(3%,49%,54%); stroke-linecap: butt; stroke-width: 1.3;"/>
+			<polygon points="342 28, 343.2728 33.86345, 338.1982 32.64178" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,54%); fill-rule: evenodd;"/>
+			<rect x="0" y="224" width="145" height="54" rx="7" ry="7" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,54%); fill-rule: evenodd;"/>
+			<text x="24.32099609374999" y="257.5" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,515) scale(1,-1)">Existing valid workflow</text>
+			<text x="24.62861328124999" y="244.5" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,489) scale(1,-1)">Zone 2 sessions active</text>
+			<rect x="171" y="224" width="145" height="54" rx="7" ry="7" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(83%,60%,20%); fill-rule: evenodd;"/>
+			<text x="211.02177734375" y="257.5" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,515) scale(1,-1)">B requests new</text>
+			<text x="203.69638671874998" y="244.5" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,489) scale(1,-1)">external connector</text>
+			<rect x="342" y="224" width="145" height="54" rx="7" ry="7" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(71%,27%,27%); fill-rule: evenodd;"/>
+			<text x="367.14130859375" y="257.5" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,515) scale(1,-1)">Changed path blocked</text>
+			<text x="367.0203125" y="244.5" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,489) scale(1,-1)">Pending reassessment</text>
+			<rect x="171" y="105" width="145" height="62" rx="7" ry="7" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(6%,14%,24%); fill-rule: evenodd;"/>
+			<text x="199.03701171875" y="149.0" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,298) scale(1,-1)">Recheck connections</text>
+			<text x="201.57587890625" y="136.0" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,272) scale(1,-1)">Task / group impact</text>
+			<text x="204.051171875" y="123.0" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,246) scale(1,-1)">Required authority</text>
+			<rect x="0" y="0" width="145" height="56" rx="7" ry="7" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(3%,49%,54%); fill-rule: evenodd;"/>
+			<text x="35.471093749999994" y="41.0" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,82) scale(1,-1)">Approved change</text>
+			<text x="24.22871093749999" y="28.0" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,56) scale(1,-1)">Fresh scoped evidence</text>
+			<text x="35.571582031249996" y="15.0" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,30) scale(1,-1)">Then enable path</text>
+			<rect x="342" y="0" width="145" height="56" rx="7" ry="7" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(71%,27%,27%); fill-rule: evenodd;"/>
+			<text x="373.804296875" y="41.0" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,82) scale(1,-1)">Unjustified / unsafe</text>
+			<text x="386.1828125" y="28.0" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,56) scale(1,-1)">Keep blocked</text>
+			<text x="372.04677734375" y="15.0" style="font-family: Body; font-size: 8.4px;fill: rgb(100%,100%,100%); stroke:none;" transform="translate(0,30) scale(1,-1)">Escalate if indicated</text>
+		</g>
+	</g>
+</svg>
