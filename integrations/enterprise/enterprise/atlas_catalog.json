@@ -1,0 +1,11 @@
+{
+  "source": "https://github.com/mitre-atlas/atlas-data/blob/main/dist/ATLAS-latest.yaml",
+  "collection_version": "2026.09",
+  "source_sha256": "0c8032993315236e464df3344f6d8520bfab158441d113e09949df0608776c06",
+  "techniques": {
+    "AML.T0051": "LLM Prompt Injection",
+    "AML.T0052": "Phishing",
+    "AML.T0053": "AI Agent Tool Invocation",
+    "AML.T0086": "Exfiltration via AI Agent Tool Invocation"
+  }
+}

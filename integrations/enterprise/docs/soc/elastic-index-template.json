@@ -1,0 +1,71 @@
+{
+  "index_patterns": [
+    "aa-ztce-security*"
+  ],
+  "template": {
+    "mappings": {
+      "properties": {
+        "@timestamp": {
+          "type": "date"
+        },
+        "ecs": {
+          "properties": {
+            "version": {
+              "type": "keyword"
+            }
+          }
+        },
+        "event": {
+          "properties": {
+            "id": {
+              "type": "keyword"
+            },
+            "module": {
+              "type": "keyword"
+            },
+            "dataset": {
+              "type": "keyword"
+            },
+            "provider": {
+              "type": "keyword"
+            },
+            "kind": {
+              "type": "keyword"
+            },
+            "action": {
+              "type": "keyword"
+            },
+            "category": {
+              "type": "keyword"
+            },
+            "type": {
+              "type": "keyword"
+            },
+            "outcome": {
+              "type": "keyword"
+            },
+            "reason": {
+              "type": "keyword"
+            },
+            "severity": {
+              "type": "long"
+            },
+            "sequence": {
+              "type": "long"
+            }
+          }
+        },
+        "user": {
+          "properties": {
+            "id": {
+              "type": "keyword"
+            }
+          }
+        },
+        "aa_ztce": {
+          "type": "flattened"
+        }
+      }
+    }
+  }
+}
