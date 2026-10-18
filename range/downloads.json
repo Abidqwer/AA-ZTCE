@@ -1,0 +1,21 @@
+{
+  "llama": {
+    "tag": "b11669",
+    "url": "https://github.com/ggml-org/llama.cpp/releases/download/b11669/llama-b11669-bin-ubuntu-x64.tar.gz",
+    "sha256": "cf07c1c112d709bd67e522017471de57ed0ec8bea031d732c5422351c07f65ac"
+  },
+  "model": {
+    "name": "Qwen2.5-0.5B-Instruct-Q4_K_M",
+    "upstream": "Qwen/Qwen2.5-0.5B-Instruct-GGUF",
+    "revision": "9217f5db79a29953eb74d5343926648285ec7e67",
+    "url": "https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct-GGUF/resolve/9217f5db79a29953eb74d5343926648285ec7e67/qwen2.5-0.5b-instruct-q4_k_m.gguf",
+    "sha256": "74a4da8c9fdbcd15bd1f6d01d621410d31c6fc00986f5eb687824e7b93d7a9db",
+    "bytes": 491400032,
+    "license": "Apache-2.0; obtain license and notices from the upstream model repository"
+  },
+  "etcd": {
+    "version": "v3.6.5",
+    "url": "https://github.com/etcd-io/etcd/releases/download/v3.6.5/etcd-v3.6.5-linux-amd64.tar.gz",
+    "sha256": "66bad39ed920f6fc15fd74adcb8bfd38ba9a6412f8c7852d09eb11670e88cac3"
+  }
+}

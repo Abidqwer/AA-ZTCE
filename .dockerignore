@@ -1,0 +1,8 @@
+**/__pycache__
+**/*.pyc
+soc_state
+results
+.venv
+terraform-provider-aaztce/terraform-provider-aaztce
+.assurance_cache
+.range_venv

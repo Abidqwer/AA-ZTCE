@@ -1,0 +1,693 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "AA-ZTCE SOAR Control API",
+    "version": "0.4.0",
+    "description": "mTLS plus HMAC-SHA256 signed REST. Canonical signing string is METHOD + LF + exact path/query + LF + audience/domain ID + LF + integer timestamp + LF + nonce + LF + lowercase SHA256(exact UTF-8 body). No trailing newline. Nonce: 32-128 lowercase hexadecimal characters. Timestamp window: +/-90 seconds. Nonce retention: 180 seconds. New nonce for each retry; preserve command_id and exact semantic body. No credential or privilege issuance endpoints."
+  },
+  "security": [
+    {
+      "ClientCertificate": [],
+      "KeyId": [],
+      "Audience": [],
+      "Timestamp": [],
+      "Nonce": [],
+      "Signature": []
+    }
+  ],
+  "paths": {
+    "/health": {
+      "get": {
+        "security": [
+          {
+            "ClientCertificate": []
+          }
+        ],
+        "summary": "Minimal liveness, without state or secrets",
+        "responses": {
+          "200": {
+            "description": "Service running"
+          }
+        }
+      }
+    },
+    "/v1/actions": {
+      "post": {
+        "operationId": "applyResponse",
+        "summary": "Apply a scoped preventive response",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Action"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Applied, or identical completed command returned without reapplying",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActionResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication failed or stale timestamp",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Action/target scope denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Unknown target or endpoint",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Nonce replay or command-ID conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Body too large",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Audit or operation unavailable; retry with same command ID and new nonce",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/events": {
+      "get": {
+        "operationId": "readEvents",
+        "summary": "Read agent-scoped ECS events",
+        "parameters": [
+          {
+            "name": "after",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 500,
+              "default": 100
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ECS documents and global sequence cursor; skipped rows may be hidden by agent scope",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "events",
+                    "next_after"
+                  ],
+                  "properties": {
+                    "events": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "@timestamp",
+                          "ecs",
+                          "event",
+                          "aa_ztce"
+                        ]
+                      }
+                    },
+                    "next_after": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication failed or stale timestamp",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Action/target scope denied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Unknown target or endpoint",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Nonce replay or command-ID conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Body too large",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Audit or operation unavailable; retry with same command ID and new nonce",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/workflows/{name}": {
+      "parameters": [
+        {
+          "name": "name",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_-]{0,63}$"
+          }
+        }
+      ],
+      "get": {
+        "summary": "Read managed workflow",
+        "description": "Requires manage_workflows action and agent scope; writes additionally require explicit resource and destination scopes. No identity enrollment or grant issuance.",
+        "responses": {
+          "200": {
+            "description": "Desired state returned or deletion applied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowRead"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or reserved workflow"
+          },
+          "401": {
+            "description": "Authentication failed"
+          },
+          "403": {
+            "description": "Role or target scope denied"
+          },
+          "404": {
+            "description": "Workflow not found"
+          },
+          "409": {
+            "description": "Replay or stale revision"
+          },
+          "413": {
+            "description": "Body too large"
+          },
+          "503": {
+            "description": "Audit or operation unavailable"
+          }
+        }
+      },
+      "put": {
+        "summary": "Create or update a workflow using expected_revision",
+        "description": "Requires manage_workflows action and agent scope; writes additionally require explicit resource and destination scopes. No identity enrollment or grant issuance.",
+        "responses": {
+          "200": {
+            "description": "Desired state returned or deletion applied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowRead"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or reserved workflow"
+          },
+          "401": {
+            "description": "Authentication failed"
+          },
+          "403": {
+            "description": "Role or target scope denied"
+          },
+          "404": {
+            "description": "Workflow not found"
+          },
+          "409": {
+            "description": "Replay or stale revision"
+          },
+          "413": {
+            "description": "Body too large"
+          },
+          "503": {
+            "description": "Audit or operation unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WorkflowWrite"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete workflow and revoke its sessions",
+        "description": "Requires manage_workflows action and agent scope; writes additionally require explicit resource and destination scopes. No identity enrollment or grant issuance.",
+        "responses": {
+          "200": {
+            "description": "Workflow deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "deleted"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "deleted": {
+                      "const": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid or reserved workflow"
+          },
+          "401": {
+            "description": "Authentication failed"
+          },
+          "403": {
+            "description": "Role or target scope denied"
+          },
+          "404": {
+            "description": "Workflow not found"
+          },
+          "409": {
+            "description": "Replay or stale revision"
+          },
+          "413": {
+            "description": "Body too large"
+          },
+          "503": {
+            "description": "Audit or operation unavailable"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WorkflowDelete"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "ClientCertificate": {
+        "type": "mutualTLS"
+      },
+      "KeyId": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-AA-Key-ID"
+      },
+      "Audience": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-AA-Audience"
+      },
+      "Timestamp": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-AA-Timestamp"
+      },
+      "Nonce": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-AA-Nonce"
+      },
+      "Signature": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-AA-Signature"
+      }
+    },
+    "schemas": {
+      "Action": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "action",
+          "agent_id",
+          "command_id",
+          "case_id"
+        ],
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "revoke_session",
+              "suspend_session",
+              "require_reauth",
+              "disable_agent"
+            ]
+          },
+          "agent_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.:@-]{1,128}$"
+          },
+          "session_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.:@-]{1,128}$"
+          },
+          "command_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.:@-]{1,128}$"
+          },
+          "case_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.:@-]{1,128}$"
+          }
+        },
+        "oneOf": [
+          {
+            "properties": {
+              "action": {
+                "enum": [
+                  "revoke_session",
+                  "suspend_session"
+                ]
+              }
+            },
+            "required": [
+              "session_id"
+            ]
+          },
+          {
+            "properties": {
+              "action": {
+                "enum": [
+                  "require_reauth",
+                  "disable_agent"
+                ]
+              }
+            },
+            "not": {
+              "required": [
+                "session_id"
+              ]
+            }
+          }
+        ]
+      },
+      "ActionResult": {
+        "type": "object",
+        "required": [
+          "command_id",
+          "action",
+          "agent_id",
+          "status",
+          "affected_sessions",
+          "duplicate"
+        ],
+        "properties": {
+          "command_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.:@-]{1,128}$"
+          },
+          "action": {
+            "type": "string"
+          },
+          "agent_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_.:@-]{1,128}$"
+          },
+          "status": {
+            "const": "applied"
+          },
+          "affected_sessions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "duplicate": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "required": [
+          "error"
+        ],
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "WorkflowWrite": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "agents",
+          "resources",
+          "destinations",
+          "purpose",
+          "expected_revision"
+        ],
+        "properties": {
+          "agents": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 32,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          "resources": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 32,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          "destinations": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 32,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          "purpose": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "expected_revision": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      },
+      "WorkflowRead": {
+        "type": "object",
+        "required": [
+          "id",
+          "revision",
+          "agents",
+          "resources",
+          "destinations",
+          "purpose"
+        ],
+        "properties": {
+          "agents": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 32,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          "resources": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 32,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          "destinations": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 32,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          "purpose": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "id": {
+            "type": "string"
+          },
+          "revision": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
+      },
+      "WorkflowDelete": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "expected_revision"
+        ],
+        "properties": {
+          "expected_revision": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      }
+    }
+  }
+}
