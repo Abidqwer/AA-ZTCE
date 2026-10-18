@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.venv/
+published/
+results/
+soc_state/
+AA-ZTCE-V0.2.1-original.zip
+terraform-provider-aaztce/terraform-provider-aaztce
+terraform-provider-aaztce/terraform-provider-aaztce.exe
+docs/soc/*.pdf
